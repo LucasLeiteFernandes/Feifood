@@ -1,10 +1,6 @@
-Perfeito 💪
-Aqui está um **README.md completo**, no formato ideal para o GitHub — com explicação de **instalação, execução, descrição de todas as funções (do arquivo `funcoes.c` e `funcoes.h`)**, e **explicação detalhada do fluxo da `main.c`**.
-
----
-
-````markdown
 # 🍔 FEIFOOD
+---
+````markdown
 
 Este projeto é um **sistema de gerenciamento de pedidos de restaurante**, feito em **linguagem C**, com **armazenamento em arquivos binários**.  
 Permite **cadastro e login de usuários**, **busca e adição de alimentos**, **criação e cancelamento de pedidos**, além de **avaliação dos pedidos realizados**.
