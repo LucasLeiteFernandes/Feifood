@@ -38,11 +38,10 @@ gcc *.c -o feifood
 ## 🧠 Estrutura do Projeto
 
 ```
-sistema-pedidos/
+Feifood/
 ├── main.c          # Arquivo principal com o fluxo do programa
 ├── funcoes.c       # Implementação das funções auxiliares
 ├── funcoes.h       # Declaração das funções e estruturas
-└── alimentos.bin   # (gerado automaticamente) Base de dados de alimentos
 ```
 
 ---

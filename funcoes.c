@@ -227,10 +227,11 @@ void imprimir_ingredientes(char *ingredientes){
     int i, len = strlen(ingredientes);
     for (i = 0; i < len; i++) {
         if (ingredientes[i] == ',')
-            printf("\n- ");
+            printf(";\n- ");
         else
             printf("%c", ingredientes[i]);
     }
+    printf(";");
 }
 
 // Busca um alimento pelo nome e exibe seus detalhes
@@ -241,15 +242,16 @@ float buscar_alimento(char *nome_comida){
     alimento comida;
     while (fread(&comida, sizeof(alimento), 1, alimentos) == 1) {
         if (strcmp(comida.nome_alimento, nome_comida) == 0){
-            printf("\n=====================\n");
+            printf("\n================================\n");
             printf("- %s -\n", comida.nome_alimento);
-            printf("- Preco: R$%.2f\n", comida.preco);
-            printf("- Nota: %.2f/5\n", comida.nota / comida.n_pedidos);
-            printf("- Quantidade de pedidos: %d\n", comida.n_pedidos);
-            printf("=====================\n");
+            printf("--------------------------------\n");
+            printf("- Preco:                R$%.2f\n", comida.preco);
+            printf("- Nota:                 %.2f/5\n", comida.nota / comida.n_pedidos);
+            printf("- Qntd de pedidos:      %d\n", comida.n_pedidos);
+            printf("--------------------------------\n");
             printf("- Ingredientes:\n- ");
             imprimir_ingredientes(comida.descricao);
-            printf("\n=====================\n");
+            printf("\n================================\n\n");
             fclose(alimentos);
             return comida.preco;
         }
