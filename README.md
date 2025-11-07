@@ -15,8 +15,8 @@ Permite **cadastro e login de usuários**, **busca e adição de alimentos**, **
 ### 🔹 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seuusuario/sistema-pedidos.git
-cd sistema-pedidos
+git clone https://github.com/LucasLeiteFernandes/Feifood.git
+cd Feifood
 ```
 
 ### 🔹 2. Compilar o projeto
@@ -24,13 +24,13 @@ cd sistema-pedidos
 Use o compilador GCC:
 
 ```bash
-gcc main.c funcoes.c -o pedidos
+gcc *.c -o feifood
 ```
 
 ### 🔹 3. Executar o programa
 
 ```bash
-./pedidos
+./feifood
 ```
 
 ---
@@ -241,7 +241,7 @@ Retorna `0` em caso de sucesso.
 
 ### 🧩 `void avaliar_pedido(float nota, char *copia_pedido)`
 
-Registra uma avaliação dos itens do pedido (nota de 0 a 5) em `avaliacoes.bin`.
+Registra uma avaliação dos itens do pedido (nota de 0 a 5) em `alimentos.bin`.
 A string `copia_pedido` contém apenas os nomes dos itens avaliados.
 
 ---
@@ -288,14 +288,13 @@ A função `main()` organiza todo o funcionamento do sistema:
 | `usuarios.bin`   | Guarda os dados dos usuários cadastrados    |
 | `alimentos.bin`  | Contém o catálogo de alimentos disponíveis  |
 | `pedidos.bin`    | Armazena os pedidos realizados              |
-| `avaliacoes.bin` | Registra as notas atribuídas pelos usuários |
 
 ---
 
 ## 🧑‍💻 Exemplo de Uso
 
 ```bash
-$ ./pedidos
+$ ./feifood
 
 - Menu de Login -
 1 - Sair
