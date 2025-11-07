@@ -264,17 +264,32 @@ float buscar_alimento(char *nome_comida){
 void imprimir_alimentos(){
     FILE *alimentos = fopen("alimentos.bin", "rb");
     if (alimentos == NULL) printf("erro");
+    int t = 22, i, len;
 
     alimento comida;
-    printf("======================\n");
-    printf("- Lista de Alimentos -\n");
+    printf("=======================================================\n");
+    printf("-                  Buscar alimento                    -\n");
+    printf("=======================================================\n");
+    printf("-                 Lista de Alimentos                  -\n");
+    printf("-------------------------------------------------------\n");
+    printf("- Nome                   Preco                 Nota   -\n");
     while (fread(&comida, sizeof(alimento), 1, alimentos) == 1) {
-        printf("---------------------\n");
         printf("- %s ", comida.nome_alimento);
-        printf("- Preco: R$%.2f ", comida.preco);
-        printf("- Nota: %.2f/5\n", comida.nota / comida.n_pedidos);
+        len = strlen(comida.nome_alimento);
+        for (i = 0; i < t - len; i++){
+            printf(" ");
+        } printf("R$%.2f ", comida.preco);
+        if (comida.preco > 10 && comida.preco < 100){
+            for (i = 0; i < 14; i++){
+                printf(" ");
+            }
+        } else if (comida.preco < 10){
+            for (i = 0; i < 15; i++){
+                printf(" ");
+            }
+        } printf("%.2f/5 -\n", comida.nota / comida.n_pedidos);
     }
-    printf("=====================\n\n");
+    printf("=======================================================\n\n");
     fclose(alimentos);
 }
 
@@ -291,25 +306,31 @@ int menu_add_pedido(){
 // Imprime as informações completas de um pedido
 void imprimir_pedido(Pedido pedido){
     int i, len = strlen(pedido.itens);
-    printf("=======================\n");
+    int t = 28, tItemAtual = 0, tSub = 0, a;
+    printf("=======================================\n");
     printf("- Nome: %s\n", pedido.nome);
     printf("- Email: %s\n", pedido.email);
-    printf("=======================\n");
-    printf("- Item          Preco\n");
-    printf("-----------------------\n- ");
+    printf("=======================================\n");
+    printf("- Item                        Preco   -\n");
+    printf("---------------------------------------\n- ");
+
     for (i = 0; i < len; i++) {
-        if (pedido.itens[i] == ',')
-            printf("        ");
-        else if(i == len - 1)
-            printf("\n");
-        else if (pedido.itens[i] == '/')
-            printf("\n- ");
-        else
+        if (pedido.itens[i] == ','){   
+            for (a = 0; a < t - tSub; a++) 
+                printf(" ");
+        } else if(i == len - 1){
+            printf(" -\n");
+        } else if (pedido.itens[i] == '/'){
+            printf(" -\n- ");
+            tSub = 0;
+        } else {
             printf("%c", pedido.itens[i]);
+            tSub++;
+        }
     }
-    printf("=======================\n");
-    printf("Total         R$%.2f\n", pedido.valor_total);
-    printf("=======================\n\n");
+    printf("=======================================\n");
+    printf("- Total                       R$%.2f -\n", pedido.valor_total);
+    printf("=======================================\n\n");
 }
 
 // Grava o pedido no arquivo binário
@@ -393,6 +414,10 @@ int remover_item(Pedido *pedido) {
         } else {
             item_atual[j++] = pedido->itens[i];
         }
+    }
+
+    if (novo_itens[strlen(novo_itens) - 1] == '/'){
+        novo_itens[strlen(novo_itens) - 1] = '\0';
     }
 
     strcpy(pedido->itens, novo_itens);

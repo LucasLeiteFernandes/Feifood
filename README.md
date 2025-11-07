@@ -1,8 +1,11 @@
-# 🍔 FEIFOOD
----
-````markdown
 
-Este projeto é um **sistema de gerenciamento de pedidos de restaurante**, feito em **linguagem C**, com **armazenamento em arquivos binários**.  
+---
+
+# 🍔 FEIFOOD
+
+> Sistema de gerenciamento de pedidos de restaurante em **C** com **arquivos binários**.
+
+Este projeto é um **sistema de gerenciamento de pedidos de restaurante**, feito em **linguagem C**, com **armazenamento em arquivos binários**.
 Permite **cadastro e login de usuários**, **busca e adição de alimentos**, **criação e cancelamento de pedidos**, além de **avaliação dos pedidos realizados**.
 
 ---
@@ -14,7 +17,7 @@ Permite **cadastro e login de usuários**, **busca e adição de alimentos**, **
 ```bash
 git clone https://github.com/seuusuario/sistema-pedidos.git
 cd sistema-pedidos
-````
+```
 
 ### 🔹 2. Compilar o projeto
 
@@ -61,18 +64,16 @@ typedef struct {
 
 Representa um pedido realizado por um usuário, com:
 
-* `email` → email do cliente;
-* `nome` → nome do cliente;
-* `itens` → lista de itens adicionados ao pedido;
-* `valor_total` → soma total dos valores dos alimentos.
+* `email` → email do cliente
+* `nome` → nome do cliente
+* `itens` → lista de itens adicionados ao pedido
+* `valor_total` → soma total dos valores dos alimentos
 
 ---
 
 ## 🔧 Funções — Arquivo `funcoes.c`
 
-Abaixo estão as principais funções que compõem o sistema.
-
----
+Abaixo estão as principais funções que compõem o sistema:
 
 ### 🧩 `int menu_login(void)`
 
@@ -136,16 +137,16 @@ Retorna a escolha feita.
 Valida a senha informada pelo usuário.
 Critérios:
 
-* Mínimo 8 caracteres;
-* Pelo menos uma letra maiúscula;
-* Uma letra minúscula;
-* Um número;
-* Um caractere especial.
+* Mínimo 8 caracteres
+* Pelo menos uma letra maiúscula
+* Uma letra minúscula
+* Um número
+* Um caractere especial
 
 Retorna:
 
-* `1` → senha válida;
-* `0` → senha inválida.
+* `1` → senha válida
+* `0` → senha inválida
 
 ---
 
@@ -155,9 +156,9 @@ Registra um novo usuário no arquivo `usuarios.bin`.
 
 Grava:
 
-* Email,
-* Nome de usuário,
-* Senha criptografada (ou direta, dependendo da implementação).
+* Email
+* Nome de usuário
+* Senha criptografada (ou direta, dependendo da implementação)
 
 Retorna `0` em caso de sucesso.
 
@@ -169,8 +170,8 @@ Valida o login do usuário comparando com os dados em `usuarios.bin`.
 
 Retorna:
 
-* `0` → login bem-sucedido;
-* `1` → falha no login (usuário ou senha incorretos).
+* `0` → login bem-sucedido
+* `1` → falha no login (usuário ou senha incorretos)
 
 ---
 
@@ -198,9 +199,9 @@ Se não existir, retorna `0`.
 
 Registra o pedido no arquivo `pedidos.bin`, com:
 
-* Nome do cliente,
-* Itens,
-* Valor total.
+* Nome do cliente
+* Itens
+* Valor total
 
 Retorna `0` se o pedido foi gravado com sucesso.
 
@@ -231,8 +232,8 @@ Retorna `0` se o item foi removido com sucesso.
 
 Cancela todo o pedido atual, limpando:
 
-* Lista de itens,
-* Valor total.
+* Lista de itens
+* Valor total
 
 Retorna `0` em caso de sucesso.
 
@@ -250,40 +251,33 @@ A string `copia_pedido` contém apenas os nomes dos itens avaliados.
 A função `main()` organiza todo o funcionamento do sistema:
 
 1. **Login ou Cadastro:**
-
-   * Usuário pode cadastrar nova conta ou logar.
-   * Senhas são validadas antes do cadastro.
-   * Enquanto `logado != 0`, o usuário fica no menu de login.
+   Usuário pode cadastrar nova conta ou logar.
+   Senhas são validadas antes do cadastro.
 
 2. **Menu Principal:**
+   Após o login, o sistema mostra o menu principal com 4 opções:
 
-   * Após o login, o sistema mostra o menu principal com 4 opções:
-
-     * Sair;
-     * Buscar alimento;
-     * Visualizar pedido;
-     * Avaliar pedido.
+   * Sair
+   * Buscar alimento
+   * Visualizar pedido
+   * Avaliar pedido
 
 3. **Busca e Adição de Alimentos:**
-
-   * Exibe os alimentos cadastrados (`imprimir_alimentos()`).
-   * Permite buscar um alimento e adicioná-lo ao pedido (`buscar_alimento()`).
+   Exibe os alimentos cadastrados (`imprimir_alimentos()`).
+   Permite buscar e adicionar um alimento (`buscar_alimento()`).
 
 4. **Gerenciamento do Pedido:**
 
-   * Usuário pode visualizar o pedido atual (`imprimir_pedido()`).
-   * Confirmar o pedido (`realizar_pedido()`).
-   * Remover itens (`remover_item()`).
-   * Cancelar o pedido (`cancelar_pedido()`).
+   * Visualizar o pedido (`imprimir_pedido()`)
+   * Confirmar (`realizar_pedido()`)
+   * Remover item (`remover_item()`)
+   * Cancelar (`cancelar_pedido()`)
 
 5. **Avaliação:**
-
-   * Após concluir o pedido, o usuário pode avaliá-lo (`avaliar_pedido()`).
-   * O sistema armazena as notas de 0 a 5 associadas aos itens do pedido.
+   Após concluir o pedido, o usuário pode avaliá-lo (`avaliar_pedido()`).
 
 6. **Encerramento:**
-
-   * O programa finaliza ao escolher a opção “Sair”.
+   O programa finaliza ao escolher **“Sair”**.
 
 ---
 
@@ -322,21 +316,3 @@ Cadastro realizado com sucesso.
 ```
 
 ---
-
-## 🧩 Autor
-
-**Lucas Leite**
-💻 Desenvolvedor C e criador deste sistema.
-
----
-
-## 📜 Licença
-
-Este projeto está sob a licença MIT — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-```
-
----
-
-Quer que eu gere também a **versão com tabela de funções e descrições técnicas (parâmetros e retorno)**, no estilo documentação técnica de API (ex: `verificar_senha(char *senha)` → parâmetros, retorno, uso)? Isso deixaria o README mais profissional.
-```

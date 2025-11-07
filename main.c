@@ -6,7 +6,7 @@
 
 int main(){
     int opcao;                                   // Variável para armazenar a escolha do usuário nos menus
-    int logado = 1, senha_verificada, tem_item = 1, pedido_realizado;
+    int logado = 1, senha_verificada, tem_item = 1, pedido_realizado, count_itens = 0;
     // logado → controla se o usuário está logado
     // senha_verificada → resultado da verificação da senha
     // tem_item → indica se há algum item no pedido (1 = não tem, 0 = tem)
@@ -27,8 +27,8 @@ int main(){
     
     //colocar_alimento();
     //imprimir_alimento();
-    // Essas funções provavelmente preenchem e exibem os alimentos disponíveis no sistema (desativadas por enquanto)
-
+    // Essas funções preenchem e exibem os alimentos disponíveis no sistema (desativadas por enquanto)
+    //imprimir_alimentos();
     // ---------- LOOP DE LOGIN ----------
     while (logado != 0){                         // Enquanto o usuário não sair ou logar corretamente
         opcao = menu_login();                    // Mostra o menu de login e lê a opção do usuário
@@ -89,7 +89,6 @@ int main(){
 
         } else if (opcao == 2){                  // Opção 2: buscar alimento e adicionar ao pedido
             valor = 0;
-            printf("\n- Buscar alimento -\n");
             imprimir_alimentos();                 // Mostra todos os alimentos disponíveis
             printf("- Digite o alimento que deseja buscar: ");
             scanf("%s", &comida);
@@ -114,13 +113,13 @@ int main(){
                     // Armazena uma cópia simples (sem valor) para avaliação posterior
                     sprintf(copia_itens, "%s/", comida);
                     strcat(copia_pedido, copia_itens);
-
+                    count_itens++;
                     tem_item = 0;                 // Indica que o pedido tem pelo menos um item
                 }
             }
 
         } else if (opcao == 3){                   // Opção 3: revisar e finalizar o pedido
-            if (tem_item == 0){                   // Só permite se houver itens no pedido
+            if (tem_item == 0 && count_itens > 0){                   // Só permite se houver itens no pedido
                 imprimir_pedido(pedido);          // Mostra o pedido atual
                 int confirmacao = confirmar_pedido();  // Pergunta o que o usuário quer fazer com o pedido
 
@@ -133,11 +132,14 @@ int main(){
 
                 } else if (confirmacao == 3){      // Remover item do pedido
                     remover_item(&pedido);
+                    count_itens--;
 
                 } else if (confirmacao == 4){      // Cancelar todo o pedido
                     int pedido_cancelado = cancelar_pedido(&pedido, itens);
                     if (pedido_cancelado == 0){
                         printf("Pedido cancelado\n");
+                        tem_item = 1;
+                        count_itens = 0;
                     }
                 }
 
