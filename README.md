@@ -1,333 +1,346 @@
-# Feifood
-Projeto de desenvolvimento de algoritos do 2° semestre de 2025
-Perfeito 👍
-Aqui está o **README.md** formatado e limpo — você pode **copiar e colar diretamente** no GitHub sem precisar ajustar nada.
+Perfeito 💪
+Aqui está um **README.md completo**, no formato ideal para o GitHub — com explicação de **instalação, execução, descrição de todas as funções (do arquivo `funcoes.c` e `funcoes.h`)**, e **explicação detalhada do fluxo da `main.c`**.
 
 ---
 
-# 🍔 Sistema de Pedidos de Alimentos em C
+````markdown
+# 🍔 FEIFOOD
 
-Um sistema de pedidos de alimentos desenvolvido em **C**, utilizando **arquivos binários** para armazenar usuários, alimentos e pedidos.
-O sistema permite **cadastro, login, criação de pedidos, cancelamento, remoção de itens e avaliação** dos pedidos realizados.
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-📦 projeto-pedidos
- ┣ 📜 main.c
- ┣ 📜 funcoes.c
- ┣ 📜 funcoes.h
- ┣ 📜 usuarios.bin
- ┣ 📜 alimentos.bin
- ┣ 📜 pedidos.bin
- ┗ 📜 README.md
-```
+Este projeto é um **sistema de gerenciamento de pedidos de restaurante**, feito em **linguagem C**, com **armazenamento em arquivos binários**.  
+Permite **cadastro e login de usuários**, **busca e adição de alimentos**, **criação e cancelamento de pedidos**, além de **avaliação dos pedidos realizados**.
 
 ---
 
-## ⚙️ Instalação e Execução
+## 📦 Instalação e Execução
 
-### 🔧 Pré-requisitos
-
-Certifique-se de ter o compilador GCC instalado:
+### 🔹 1. Clonar o repositório
 
 ```bash
-gcc --version
-```
+git clone https://github.com/seuusuario/sistema-pedidos.git
+cd sistema-pedidos
+````
 
-Se não tiver, instale com:
+### 🔹 2. Compilar o projeto
 
-```bash
-sudo apt install build-essential
-```
-
-No Windows, você pode usar o **MinGW** ou **Code::Blocks**.
-
----
-
-### 🚀 Compilação
-
-No terminal, dentro da pasta do projeto, compile os arquivos:
+Use o compilador GCC:
 
 ```bash
-gcc main.c funcoes.c -o sistema
+gcc main.c funcoes.c -o pedidos
 ```
 
-Em seguida, execute o programa:
+### 🔹 3. Executar o programa
 
 ```bash
-./sistema
+./pedidos
 ```
 
 ---
 
-## 🧠 Estrutura Lógica
+## 🧠 Estrutura do Projeto
 
-O sistema é dividido em duas partes principais:
-
-1. **funcoes.c / funcoes.h** → Contêm todas as funções auxiliares (cadastro, login, manipulação de arquivos, etc.)
-2. **main.c** → Contém o fluxo principal do programa, menus e interações com o usuário.
-
----
-
-# 🧩 FUNÇÕES (funcoes.c)
-
-### `int verificar_senha(char *senha)`
-
-Verifica se a senha inserida atende aos critérios de segurança:
-
-* Mínimo de 8 caracteres
-* Pelo menos uma letra maiúscula
-* Pelo menos uma letra minúscula
-* Pelo menos um número
-* Pelo menos um caractere especial
-
-**Retorno:**
-✅ `1` → senha válida
-❌ `0` → senha inválida
+```
+sistema-pedidos/
+├── main.c          # Arquivo principal com o fluxo do programa
+├── funcoes.c       # Implementação das funções auxiliares
+├── funcoes.h       # Declaração das funções e estruturas
+└── alimentos.bin   # (gerado automaticamente) Base de dados de alimentos
+```
 
 ---
 
-### `int cadastro(char *email, char *nome, char *senha)`
+## ⚙️ Estruturas e Funções
 
-Realiza o **cadastro de um novo usuário**, salvando suas informações em um arquivo binário (`usuarios.bin`).
+### 🔸 Estrutura `Pedido`
 
-**Retorno:**
-✅ `0` → cadastro realizado com sucesso
-
----
-
-### `int login(char *email, char *nome, char *senha)`
-
-Verifica as credenciais do usuário comparando com os registros salvos em `usuarios.bin`.
-
-**Retorno:**
-✅ `0` → login bem-sucedido
-❌ `1` → credenciais incorretas
-
----
-
-### `void colocar_alimento()`
-
-Adiciona manualmente alimentos e seus valores no arquivo `alimentos.bin`.
-Normalmente usada apenas uma vez para preencher o banco inicial.
-
----
-
-### `void imprimir_alimentos()`
-
-Exibe todos os alimentos disponíveis no sistema com seus respectivos preços.
-
----
-
-### `float buscar_alimento(char *nome)`
-
-Procura um alimento pelo nome no arquivo `alimentos.bin` e retorna seu valor.
-
-**Retorno:**
-
-* Valor do alimento encontrado
-* `0` se o alimento não for encontrado
-
----
-
-### `int menu_login()`
-
-Exibe o menu inicial com as opções:
-
-1. Sair
-2. Cadastrar
-3. Logar
-
-**Retorno:** número da opção escolhida.
-
----
-
-### `int menu_principal()`
-
-Exibe o menu após o login:
-
-1. Sair
-2. Buscar alimento
-3. Finalizar pedido
-4. Avaliar pedido
-
-**Retorno:** número da opção escolhida.
-
----
-
-### `int menu_add_pedido()`
-
-Exibe as opções após encontrar um alimento:
-
-1. Voltar
-2. Adicionar ao pedido
-
----
-
-### `void imprimir_pedido(Pedido pedido)`
-
-Exibe todos os itens adicionados ao pedido e o valor total acumulado.
-
----
-
-### `int confirmar_pedido()`
-
-Exibe o menu de confirmação do pedido:
-
-1. Voltar
-2. Confirmar pedido
-3. Remover item
-4. Cancelar pedido
-
-**Retorno:** número da opção selecionada.
-
----
-
-### `int realizar_pedido(Pedido pedido)`
-
-Finaliza o pedido e grava as informações no arquivo `pedidos.bin`.
-
-**Retorno:**
-✅ `0` → pedido realizado com sucesso
-
----
-
-### `int remover_item(Pedido *pedido)`
-
-Remove um item específico do pedido atual.
-O usuário informa o nome do alimento a ser removido.
-
----
-
-### `int cancelar_pedido(Pedido *pedido, char *itens)`
-
-Cancela o pedido atual, limpando os itens e zerando o valor total.
-
-**Retorno:**
-✅ `0` → pedido cancelado com sucesso
-
----
-
-### `void avaliar_pedido(float nota, char *itens)`
-
-Registra a nota (de 0 a 5) dada pelo usuário aos itens do último pedido.
-As avaliações podem ser armazenadas em um arquivo separado (ex: `avaliacoes.txt`).
-
----
-
-# 💻 MAIN.C (Fluxo Principal)
-
-A função `main()` coordena toda a lógica do programa, dividida em **duas grandes fases**:
-
----
-
-## 🟢 1. Login e Cadastro
-
-Enquanto o usuário não estiver logado (`logado != 0`):
-
-* O menu de login é mostrado (`menu_login()`).
-* O usuário pode:
-
-  * **Sair**
-  * **Cadastrar** (chama `cadastro()`)
-  * **Logar** (chama `login()`)
-
-Após o login bem-sucedido (`logado = 0`), o programa avança para o menu principal.
-
----
-
-## 🟡 2. Menu Principal (após login)
-
-O usuário tem as opções:
-
-### **1. Sair**
-
-Encerra o programa.
-
-### **2. Buscar alimento**
-
-* Exibe os alimentos disponíveis (`imprimir_alimentos()`).
-* Permite buscar por nome (`buscar_alimento()`).
-* Caso encontrado, o usuário pode adicioná-lo ao pedido (`pedido.itens` e `pedido.valor_total`).
-
-### **3. Finalizar pedido**
-
-* Mostra os itens do pedido (`imprimir_pedido()`).
-* Permite confirmar, remover ou cancelar o pedido.
-* Se confirmado, grava o pedido (`realizar_pedido()`).
-
-### **4. Avaliar pedido**
-
-* O usuário dá uma nota de **0 a 5** aos itens do último pedido (`avaliar_pedido()`).
-
----
-
-## 🧾 Estrutura do Pedido (`struct Pedido`)
-
-Definida em `funcoes.h`:
+Declarada em `funcoes.h`:
 
 ```c
 typedef struct {
-    char email[20];
-    char nome[20];
+    char email[50];
+    char nome[50];
     char itens[255];
     float valor_total;
 } Pedido;
 ```
 
+Representa um pedido realizado por um usuário, com:
+
+* `email` → email do cliente;
+* `nome` → nome do cliente;
+* `itens` → lista de itens adicionados ao pedido;
+* `valor_total` → soma total dos valores dos alimentos.
+
 ---
 
-# 🧪 Exemplo de Uso
+## 🔧 Funções — Arquivo `funcoes.c`
 
-### 1. Rodar o programa
+Abaixo estão as principais funções que compõem o sistema.
 
-```bash
-./sistema
-```
+---
 
-### 2. Menu de Login
+### 🧩 `int menu_login(void)`
+
+Exibe o menu de login inicial:
 
 ```
 1 - Sair
-2 - Cadastrar
-3 - Logar
+2 - Cadastrar usuário
+3 - Fazer login
 ```
 
-### 3. Menu Principal
+Retorna a opção escolhida pelo usuário.
+
+---
+
+### 🧩 `int menu_principal(void)`
+
+Exibe o menu principal após o login:
 
 ```
 1 - Sair
 2 - Buscar alimento
-3 - Finalizar pedido
+3 - Visualizar pedido
+4 - Avaliar pedido
+```
+
+Retorna a opção selecionada.
+
+---
+
+### 🧩 `int menu_add_pedido(void)`
+
+Mostra um menu perguntando se o usuário quer adicionar o alimento ao pedido:
+
+```
+1 - Cancelar
+2 - Adicionar ao pedido
+```
+
+Retorna a escolha feita.
+
+---
+
+### 🧩 `int confirmar_pedido(void)`
+
+Pergunta o que o usuário quer fazer com o pedido atual:
+
+```
+1 - Voltar
+2 - Confirmar pedido
+3 - Remover item
+4 - Cancelar pedido
+```
+
+Retorna a escolha feita.
+
+---
+
+### 🧩 `int verificar_senha(char *senha)`
+
+Valida a senha informada pelo usuário.
+Critérios:
+
+* Mínimo 8 caracteres;
+* Pelo menos uma letra maiúscula;
+* Uma letra minúscula;
+* Um número;
+* Um caractere especial.
+
+Retorna:
+
+* `1` → senha válida;
+* `0` → senha inválida.
+
+---
+
+### 🧩 `int cadastro(char *email, char *nome, char *senha)`
+
+Registra um novo usuário no arquivo `usuarios.bin`.
+
+Grava:
+
+* Email,
+* Nome de usuário,
+* Senha criptografada (ou direta, dependendo da implementação).
+
+Retorna `0` em caso de sucesso.
+
+---
+
+### 🧩 `int login(char *email, char *nome, char *senha)`
+
+Valida o login do usuário comparando com os dados em `usuarios.bin`.
+
+Retorna:
+
+* `0` → login bem-sucedido;
+* `1` → falha no login (usuário ou senha incorretos).
+
+---
+
+### 🧩 `void imprimir_alimentos(void)`
+
+Lê e exibe todos os alimentos cadastrados no arquivo `alimentos.bin`.
+
+Formato exibido:
+
+```
+Nome: X | Preço: R$Y
+```
+
+---
+
+### 🧩 `float buscar_alimento(char *nome)`
+
+Procura um alimento pelo nome dentro do arquivo `alimentos.bin`.
+Se encontrado, retorna o valor do alimento.
+Se não existir, retorna `0`.
+
+---
+
+### 🧩 `int realizar_pedido(Pedido pedido)`
+
+Registra o pedido no arquivo `pedidos.bin`, com:
+
+* Nome do cliente,
+* Itens,
+* Valor total.
+
+Retorna `0` se o pedido foi gravado com sucesso.
+
+---
+
+### 🧩 `void imprimir_pedido(Pedido pedido)`
+
+Mostra na tela o conteúdo atual do pedido:
+
+```
+Itens:
+ - X
+ - Y
+Valor total: R$Z
+```
+
+---
+
+### 🧩 `int remover_item(Pedido *pedido)`
+
+Permite ao usuário remover um alimento específico da lista `pedido->itens`.
+Atualiza o valor total automaticamente.
+Retorna `0` se o item foi removido com sucesso.
+
+---
+
+### 🧩 `int cancelar_pedido(Pedido *pedido, char *itens)`
+
+Cancela todo o pedido atual, limpando:
+
+* Lista de itens,
+* Valor total.
+
+Retorna `0` em caso de sucesso.
+
+---
+
+### 🧩 `void avaliar_pedido(float nota, char *copia_pedido)`
+
+Registra uma avaliação dos itens do pedido (nota de 0 a 5) em `avaliacoes.bin`.
+A string `copia_pedido` contém apenas os nomes dos itens avaliados.
+
+---
+
+## 🧭 Fluxo da Aplicação — `main.c`
+
+A função `main()` organiza todo o funcionamento do sistema:
+
+1. **Login ou Cadastro:**
+
+   * Usuário pode cadastrar nova conta ou logar.
+   * Senhas são validadas antes do cadastro.
+   * Enquanto `logado != 0`, o usuário fica no menu de login.
+
+2. **Menu Principal:**
+
+   * Após o login, o sistema mostra o menu principal com 4 opções:
+
+     * Sair;
+     * Buscar alimento;
+     * Visualizar pedido;
+     * Avaliar pedido.
+
+3. **Busca e Adição de Alimentos:**
+
+   * Exibe os alimentos cadastrados (`imprimir_alimentos()`).
+   * Permite buscar um alimento e adicioná-lo ao pedido (`buscar_alimento()`).
+
+4. **Gerenciamento do Pedido:**
+
+   * Usuário pode visualizar o pedido atual (`imprimir_pedido()`).
+   * Confirmar o pedido (`realizar_pedido()`).
+   * Remover itens (`remover_item()`).
+   * Cancelar o pedido (`cancelar_pedido()`).
+
+5. **Avaliação:**
+
+   * Após concluir o pedido, o usuário pode avaliá-lo (`avaliar_pedido()`).
+   * O sistema armazena as notas de 0 a 5 associadas aos itens do pedido.
+
+6. **Encerramento:**
+
+   * O programa finaliza ao escolher a opção “Sair”.
+
+---
+
+## 🗂️ Arquivos de Dados Gerados
+
+| Arquivo          | Descrição                                   |
+| ---------------- | ------------------------------------------- |
+| `usuarios.bin`   | Guarda os dados dos usuários cadastrados    |
+| `alimentos.bin`  | Contém o catálogo de alimentos disponíveis  |
+| `pedidos.bin`    | Armazena os pedidos realizados              |
+| `avaliacoes.bin` | Registra as notas atribuídas pelos usuários |
+
+---
+
+## 🧑‍💻 Exemplo de Uso
+
+```bash
+$ ./pedidos
+
+- Menu de Login -
+1 - Sair
+2 - Cadastrar usuário
+3 - Fazer login
+> 2
+
+Digite seu email: lucas@email.com
+Digite seu nome: lucas
+Digite sua senha: Lucas@123
+Cadastro realizado com sucesso.
+
+- Menu Principal -
+1 - Sair
+2 - Buscar alimento
+3 - Visualizar pedido
 4 - Avaliar pedido
 ```
 
 ---
 
-# 🧰 Tecnologias Utilizadas
-
-* Linguagem: **C**
-* Armazenamento: **Arquivos binários**
-* Compilador: **GCC**
-* Estrutura modular: `main.c`, `funcoes.c`, `funcoes.h`
-
----
-
-# 👨‍💻 Autor
+## 🧩 Autor
 
 **Lucas Leite**
-Projeto acadêmico desenvolvido para fins de estudo da linguagem C, manipulação de arquivos e lógica de programação estruturada.
+💻 Desenvolvedor C e criador deste sistema.
 
 ---
 
-# 🪪 Licença
+## 📜 Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Este projeto está sob a licença MIT — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+```
 
 ---
 
-✅ **Dica:** se quiser deixar o README mais visual, adicione um diagrama de fluxo (ex: com [Mermaid](https://mermaid.js.org/)) mostrando o caminho **Cadastro → Login → Pedido → Avaliação**.
-Posso gerar esse diagrama pra você se quiser. Deseja que eu adicione ele aqui?
+Quer que eu gere também a **versão com tabela de funções e descrições técnicas (parâmetros e retorno)**, no estilo documentação técnica de API (ex: `verificar_senha(char *senha)` → parâmetros, retorno, uso)? Isso deixaria o README mais profissional.
+```
