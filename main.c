@@ -7,15 +7,12 @@
 int main(){
     int opcao;                                   // Variável para armazenar a escolha do usuário nos menus
     int logado = 1, senha_verificada, tem_item = 1, pedido_realizado, count_itens = 0;
-    // logado → controla se o usuário está logado
-    // senha_verificada → resultado da verificação da senha
-    // tem_item → indica se há algum item no pedido (1 = não tem, 0 = tem)
-    // pedido_realizado → indica se o pedido foi concluído com sucesso
+    // logado → controla se o usuário está logado, senha_verificada → resultado da verificação da senha
+    // tem_item → indica se há algum item no pedido (1 = não tem, 0 = tem), pedido_realizado → indica se o pedido foi concluído com sucesso
 
     char email[20], nome[20], senha[20];         // Strings para dados do usuário
     char comida[30], itens[255], copia_pedido[255], copia_itens[255];
-    // comida → alimento pesquisado
-    // itens → string com descrição dos itens do pedido e seus valores
+    // comida → alimento pesquisado, itens → string com descrição dos itens do pedido e seus valores
     // copia_pedido e copia_itens → usadas para armazenar versões simplificadas dos itens (para avaliação)
 
     float valor_total = 0, valor = 0, nota = 0;  // Valores monetários e nota de avaliação
@@ -28,7 +25,7 @@ int main(){
     //colocar_alimento();
     //imprimir_alimento();
     // Essas funções preenchem e exibem os alimentos disponíveis no sistema (desativadas por enquanto)
-    //imprimir_alimentos();
+
     // ---------- LOOP DE LOGIN ----------
     while (logado != 0){                         // Enquanto o usuário não sair ou logar corretamente
         opcao = menu_login();                    // Mostra o menu de login e lê a opção do usuário
@@ -86,7 +83,6 @@ int main(){
         if (opcao == 1){                         // Opção 1: sair do sistema
             printf("Saindo...\n");
             exit(0);          
-
         } else if (opcao == 2){                  // Opção 2: buscar alimento e adicionar ao pedido
             valor = 0;
             imprimir_alimentos();                 // Mostra todos os alimentos disponíveis

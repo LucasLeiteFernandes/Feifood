@@ -118,7 +118,7 @@ void colocar_alimento() {
     printf("Alimentos adicionados com sucesso!\n");
 }
 
-// Função que lê e imprime os alimentos do arquivo binário
+// Função que lê e imprime os alimentos do arquivo binário para verificações
 void imprimir_alimento(){
     FILE *alimentos = fopen("alimentos.bin", "rb");
     if (alimentos == NULL) printf("erro");
